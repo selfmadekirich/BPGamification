@@ -8,7 +8,7 @@ namespace BPGamification.Interfaces
     public interface IRepository
     {
 
-        Task<IEnumerable<Task>> GetAllUserTasks(int userId);
+        Task<IEnumerable<UserTask>> GetAllUserTasks(int userId);
 
         Task<IEnumerable<Item>> GetItems();
 
@@ -23,9 +23,9 @@ namespace BPGamification.Interfaces
         /// получаем Coin конкретного пользователя
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Coin>> GetUserCoins();
+        Task<Coin> GetUserCoins(int userID);
 
-       
+
         /// <summary>
         /// получаем все badges  пользователя
         /// </summary>

@@ -43,21 +43,23 @@ namespace BPGamification
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Coin>> IRepository.GetAllCoins()
+        async Task<IEnumerable<Coin>> IRepository.GetAllCoins()
         {
-            throw new NotImplementedException();
+            return await _dataBaseContext.Coins.AsNoTracking().ToListAsync();
         }
 
-        Task<IEnumerable<Task>> IRepository.GetAllUserTasks(int userId)
+        async Task<IEnumerable<UserTask>> IRepository.GetAllUserTasks(int userId)
         {
-            throw new NotImplementedException();
+            return await _dataBaseContext.UserTasks.AsNoTracking().Where(UserTask => UserTask.UserId == userId).ToListAsync();
         }
 
-        Task<IEnumerable<Item>> IRepository.GetItems()
+
+        async Task<IEnumerable<Item>> IRepository.GetItems()
         {
-            throw new NotImplementedException();
+            return await _dataBaseContext.Items.AsNoTracking().ToListAsync();
         }
 
+        //TODO Later
         Task<IEnumerable<Coin>> IRepository.GetUserBadges()
         {
             throw new NotImplementedException();
@@ -68,14 +70,14 @@ namespace BPGamification
             return await _dataBaseContext.Users.AsNoTracking().FirstAsync(user => user.Id == userID);
         }
 
-        Task<IEnumerable<Coin>> IRepository.GetUserCoins()
+        async Task<Coin> IRepository.GetUserCoins(int userID)
         {
-            throw new NotImplementedException();
+            return await _dataBaseContext.Coins.AsNoTracking().FirstAsync(Coin => Coin.UserId == userID);
         }
 
-        Task<IEnumerable<WorksHistory>> IRepository.GetUserWorkHistory(int userID)
+        async Task<IEnumerable<WorksHistory>> IRepository.GetUserWorkHistory(int userID)
         {
-            throw new NotImplementedException();
+            return await _dataBaseContext.WorksHistories.AsNoTracking().Where(WorksHistory => WorksHistory.UserId == userID).ToListAsync();
         }
 
         async Task<IEnumerable<Task>> IRepository.GetAllTasks()
