@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/SingIn',
+    path: '/',
     name: 'SingIn',
     component: SingIn,
   },

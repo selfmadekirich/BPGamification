@@ -5,6 +5,7 @@
     </div>
     <div class="col-12 col-lg-6">
       <h2>Ачивки</h2>
+      {{ person }}
     </div>
   </div>
 </template>
@@ -14,19 +15,18 @@
 }
 </style>
 <script>
-import { getUsers } from '../users'
+import { getAcc } from '../api'
 export default {
   name: 'PersonalAcc',
   data() {
     return {
-      user: Object,
+      person: null,
     }
   },
   mounted() {
-    getUsers.then((json) => {
-      this.user = json[0]
+    getAcc.then((json) => {
+      this.person = json
     })
-    console.log(this.user)
   },
 }
 </script>

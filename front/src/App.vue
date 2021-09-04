@@ -3,8 +3,8 @@
     <div>
       <b-navbar toggleable="lg" class="container pt-3 align-items-center">
         <b-navbar-brand
-          ><router-link to="/SingIn" class="h3"
-            >МехматРГУ</router-link
+          ><router-link to="/" class="h3"
+            >Баланс Платформа</router-link
           ></b-navbar-brand
         >
 
