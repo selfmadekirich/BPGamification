@@ -1,3 +1,5 @@
+using BPGamification.Infrastructure;
+using BPGamification.Infrastructure.Interfaces;
 using BPGamification.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +34,9 @@ namespace BPGamification
             string ConnectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(ConnectionString));
 
+            services.AddHttpContextAccessor();
             services.AddScoped<IRepository, PostgreRepository>();
+            services.AddScoped<IAutorizer, Autorizer>();
 
             services.AddCors();
 
@@ -52,7 +56,7 @@ namespace BPGamification
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin());
-
+            app.UseStatusCodePages();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
