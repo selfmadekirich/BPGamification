@@ -18,9 +18,11 @@ namespace BPGamification
         }
 
 
-        Task<Purchase> IRepository.AddPurchase(Purchase purchase)
+        async Task<Purchase> IRepository.AddPurchase(Purchase purchase)
         {
-            throw new NotImplementedException();
+          var result  =  await _dataBaseContext.Purchases.AddAsync(purchase);
+            await _dataBaseContext.SaveChangesAsync();
+            return result.Entity;
         }
 
         Task<UserBage> IRepository.AddUserBadge(UserBage userBage)
@@ -28,19 +30,40 @@ namespace BPGamification
             throw new NotImplementedException();
         }
 
-        Task<WorksHistory> IRepository.AddWorkHistory(WorksHistory history)
+        async Task<WorksHistory> IRepository.AddWorkHistory(WorksHistory history)
         {
-            throw new NotImplementedException();
+            var result = await _dataBaseContext.WorksHistories.AddAsync(history);
+            await _dataBaseContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        Task<Coin> IRepository.ChangeUserCoin(Coin newCoin)
+        async Task<Coin> IRepository.ChangeUserCoin(Coin newCoin)
         {
-            throw new NotImplementedException();
+            var oldCoin = await _dataBaseContext.Coins.FirstOrDefaultAsync(coin => coin.UserId == newCoin.UserId);
+
+            if (oldCoin != null)
+            {
+                oldCoin.Coins = newCoin.Coins;
+                oldCoin.Raiting = newCoin.Raiting;
+                oldCoin.User = oldCoin.User;
+                oldCoin.UserId = newCoin.UserId;
+
+                await _dataBaseContext.SaveChangesAsync();
+
+                return oldCoin;
+            }
+
+            return null;
         }
 
-        Task IRepository.DeleteWorkHistory()
+        async System.Threading.Tasks.Task IRepository.DeleteWorkHistory()
         {
-            throw new NotImplementedException();
+            var histories =  _dataBaseContext.WorksHistories;
+            if (histories != null)
+            {
+                _dataBaseContext.WorksHistories.RemoveRange(histories);
+                await _dataBaseContext.SaveChangesAsync();
+            }
         }
 
         Task<IEnumerable<Coin>> IRepository.GetAllCoins()
