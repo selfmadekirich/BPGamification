@@ -1,3 +1,4 @@
+using BPGamification.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,8 @@ namespace BPGamification
 
             string ConnectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(ConnectionString));
+
+            services.AddScoped<IRepository, PostgreRepository>();
 
             services.AddControllers();
         }

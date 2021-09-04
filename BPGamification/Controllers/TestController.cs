@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BPGamification;
 using Microsoft.EntityFrameworkCore;
+using BPGamification.Interfaces;
 
 namespace BPGamification.Controllers
 {
@@ -13,18 +14,17 @@ namespace BPGamification.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        private DatabaseContext _databaseContext;
+        private readonly IRepository repository;
 
-        public TestController(DatabaseContext db)
+        public TestController(IRepository repo)
         {
-            _databaseContext = db;
+            repository = repo;
         }
 
         [HttpGet]
         public async Task<ActionResult<Task>> test()
         {
-            var sampleData = await _databaseContext.Tasks.ToListAsync();
-            return Ok(sampleData);
+            return Ok(await repository.TaskCheck());
         }
 
     }
