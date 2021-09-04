@@ -32,6 +32,7 @@ namespace BPGamification
             string ConnectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(ConnectionString));
 
+            services.AddHttpContextAccessor();
             services.AddScoped<IRepository, PostgreRepository>();
 
             services.AddControllers();
@@ -48,6 +49,8 @@ namespace BPGamification
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStatusCodePages();
 
             app.UseAuthorization();
 
