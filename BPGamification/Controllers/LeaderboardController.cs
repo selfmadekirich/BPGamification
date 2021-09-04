@@ -18,6 +18,9 @@ namespace LeaderboardController.Controllers
         public bool itsMe { get; set; }
 
         public int operatorId { get; set; }
+
+        public double bonus { get; set; }
+
         public Operators(string nm, int id, bool its)
         {
 
@@ -55,7 +58,18 @@ namespace LeaderboardController.Controllers
                     var Coin = await repository.GetUserCoins(op.operatorId);
                     op.reputation = (int)Coin.Raiting;
                 }
-                var t = opers.First();
+
+                //кол-во участников - позиция + 1 / кол-во 
+
+                int pos = 1;
+                int opersCount = opers.Count();
+                opers = opers.OrderByDescending(x => x.reputation).Select(Operator => ((opersCount -(pos++) + 1)*1.0 / opersCount ,Operator))
+                    .Select(x => new Operators() 
+                    { itsMe = x.Operator.itsMe , bonus  = Math.Pow(x.Item1,1.7) ,
+                        name = x.Operator.name , operatorId = x.Operator.operatorId ,
+                        reputation = x.Operator.reputation
+                    });
+
                 return Ok(opers);
             }
             catch (Exception)

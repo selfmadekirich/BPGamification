@@ -22,11 +22,16 @@ namespace Bot.Controllers
             repository = repo;
         }
 
-        [HttpGet("getWork/[body]")]
+        [HttpGet("getWork/")]
         public async Task<ActionResult> GetWork(WorksHistory data)
         {
             try
-            {
+            {  
+                
+
+                if (data == null)
+                    return BadRequest();
+
                 await repository.AddWorkHistory(data);
                 if(data.Status==true)
                 {
@@ -42,6 +47,8 @@ namespace Bot.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "database problems while getting Personal Page");
             }
         }
+
+       
 
 
     }
