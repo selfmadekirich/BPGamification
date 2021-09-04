@@ -134,6 +134,8 @@ namespace BPGamification
                 entity.Property(e => e.TaskType)
                     .HasColumnType("character varying")
                     .HasColumnName("taskType");
+
+                entity.Ignore(e => e.result);
             });
 
             modelBuilder.Entity<User>(entity =>

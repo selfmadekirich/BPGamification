@@ -34,6 +34,8 @@ namespace BPGamification
 
             services.AddScoped<IRepository, PostgreRepository>();
 
+            services.AddCors();
+
             services.AddControllers();
         }
 
@@ -48,6 +50,8 @@ namespace BPGamification
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseAuthorization();
 

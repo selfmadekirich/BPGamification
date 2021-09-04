@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -20,6 +21,9 @@ namespace BPGamification
         public int? NeedCnt { get; set; }
         public double? NeedKpi { get; set; }
         public int? NeedTime { get; set; }
+
+        [NotMapped]
+        public string result { get; set; }
 
         public virtual ICollection<UserTask> UserTasks { get; set; }
     }
