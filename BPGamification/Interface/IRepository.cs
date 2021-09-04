@@ -49,7 +49,7 @@ namespace BPGamification.Interfaces
         /// очищает таблицу WorkHistory
         /// </summary>
         /// <returns></returns>
-        Task DeleteWorkHistory();
+        System.Threading.Tasks.Task DeleteWorkHistory();
 
 
         
