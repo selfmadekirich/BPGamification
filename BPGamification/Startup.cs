@@ -38,6 +38,8 @@ namespace BPGamification
             services.AddScoped<IRepository, PostgreRepository>();
             services.AddScoped<IAutorizer, Autorizer>();
 
+            services.AddCors();
+
             services.AddControllers();
         }
 
@@ -53,8 +55,8 @@ namespace BPGamification
 
             app.UseRouting();
 
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseStatusCodePages();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
