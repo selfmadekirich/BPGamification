@@ -51,8 +51,14 @@ namespace BPGamification.Interfaces
         /// <returns></returns>
         System.Threading.Tasks.Task DeleteWorkHistory();
 
+        /// <summary>
+        /// получаем  таски пользователя всех типов
+        /// </summary>
+        /// <param name="task_ids"></param>
+        /// <returns></returns>
+        Task<IEnumerable<Task>> GetTasksByIds(HashSet<int> task_ids);
 
-        
+
         Task<IEnumerable<Task>> GetAllTasks();
 
 

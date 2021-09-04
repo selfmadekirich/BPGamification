@@ -77,6 +77,7 @@ namespace BPGamification
         }
 
 
+
         async Task<IEnumerable<Item>> IRepository.GetItems()
         {
             return await _dataBaseContext.Items.AsNoTracking().ToListAsync();
@@ -101,6 +102,11 @@ namespace BPGamification
         async Task<IEnumerable<WorksHistory>> IRepository.GetUserWorkHistory(int userID)
         {
             return await _dataBaseContext.WorksHistories.AsNoTracking().Where(WorksHistory => WorksHistory.UserId == userID).ToListAsync();
+        }
+
+        async  Task<IEnumerable<Task>> IRepository.GetTasksByIds(HashSet<int> task_ids)
+        {
+            return await _dataBaseContext.Tasks.AsNoTracking().Where(x => task_ids.Contains(x.TaskId)).ToListAsync();
         }
 
         async Task<IEnumerable<Task>> IRepository.GetAllTasks()
