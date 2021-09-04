@@ -1,3 +1,5 @@
+using BPGamification.Infrastructure;
+using BPGamification.Infrastructure.Interfaces;
 using BPGamification.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +36,7 @@ namespace BPGamification
 
             services.AddHttpContextAccessor();
             services.AddScoped<IRepository, PostgreRepository>();
+            services.AddScoped<IAutorizer, Autorizer>();
 
             services.AddControllers();
         }

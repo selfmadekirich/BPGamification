@@ -1,4 +1,5 @@
 ﻿using BPGamification.Infrastructure.Interfaces;
+using BPGamification.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,12 @@ namespace BPGamification.Infrastructure
             _httpContext = iHttpContext.HttpContext;
         }
 
-        public bool Authorization(User user)
+        public bool Authorization(UserModel userModel)
         {
             try
             {
+                var user = userModel.GetUser();
+
                 if (!(_databaseContext.Users.FirstOrDefault(p=>p.Email == user.Email && p.PasswordHash == user.PasswordHash)is null))
                 {
                     _httpContext.Response.Cookies.Delete("UserHash");
@@ -30,21 +33,6 @@ namespace BPGamification.Infrastructure
                 }
 
                 return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool Registration(User user)
-        {
-            try
-            {
-                _httpContext.Response.Cookies.Delete("UserHash");
-                _httpContext.Response.Cookies.Append("UserHash", user.PasswordHash);
-
-                return true;
             }
             catch
             {
