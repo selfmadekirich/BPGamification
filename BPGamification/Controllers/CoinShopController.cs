@@ -29,7 +29,7 @@ namespace CoinShopController.Controllers
         }
 
         [HttpGet("getshop")]
-        public async Task<ActionResult<Showcase>> GetUserPersonalPage()
+        public async Task<ActionResult<Showcase>> GetShowCase()
         {
             try
             {

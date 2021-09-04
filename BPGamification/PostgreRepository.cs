@@ -107,5 +107,10 @@ namespace BPGamification
         {
             return await _dataBaseContext.Tasks.AsNoTracking().ToListAsync();
         }
+
+        async Task<IEnumerable<User>> IRepository.GetAllUsers()
+        {
+            return await _dataBaseContext.Users.AsNoTracking().ToListAsync();
+        }
     }
 }

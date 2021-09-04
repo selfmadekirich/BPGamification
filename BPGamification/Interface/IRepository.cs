@@ -55,6 +55,8 @@ namespace BPGamification.Interfaces
         
         Task<IEnumerable<Task>> GetAllTasks();
 
+        Task<IEnumerable<User>> GetAllUsers();
+
 
 
     }
