@@ -24,7 +24,27 @@ namespace BPGamification.Controllers
         [HttpGet]
         public async Task<ActionResult<Task>> test()
         {
-            return Ok(await repository.TaskCheck());
+            try
+            {
+                return Ok(await repository.GetAllTasks());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "database problems");
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Task>> user(int id)
+        {
+            try
+            {
+                return Ok(await repository.GetUserById(id));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "database problems");
+            }
         }
 
     }
