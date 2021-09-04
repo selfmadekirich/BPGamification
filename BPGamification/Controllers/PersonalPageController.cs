@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BPGamification;
 using Microsoft.EntityFrameworkCore;
 using BPGamification.Interfaces;
+using Microsoft.AspNetCore.Cors;
 
 namespace BPGamification.Controllers
 {
@@ -20,7 +21,7 @@ namespace BPGamification.Controllers
 
     }
 
-
+    
     [Route("api/[controller]")]
     [ApiController]
     public class PersonalPageController : ControllerBase
