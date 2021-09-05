@@ -37,6 +37,20 @@ namespace BPGamification
             return result.Entity;
         }
 
+        async Task<UserTask> IRepository.UpdateUserTaskStatus(int userTaskId)
+        {
+            var oldUserTask =await  _dataBaseContext.UserTasks.FirstOrDefaultAsync(x => x.Id == userTaskId);
+
+            if (oldUserTask != null)
+            {
+                oldUserTask.Status = !oldUserTask.Status;
+                await _dataBaseContext.SaveChangesAsync();
+                return oldUserTask;
+            }
+
+            return null;
+        }
+
         async Task<Coin> IRepository.ChangeUserCoin(Coin newCoin)
         {
             var oldCoin = await _dataBaseContext.Coins.FirstOrDefaultAsync(coin => coin.UserId == newCoin.UserId);

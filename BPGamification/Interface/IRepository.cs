@@ -38,6 +38,8 @@ namespace BPGamification.Interfaces
 
         Task<WorksHistory> AddWorkHistory(WorksHistory history);
 
+        Task<UserTask> UpdateUserTaskStatus(int userTaskId);
+
         Task<Coin> ChangeUserCoin(Coin newCoin);
 
         //пока забили
