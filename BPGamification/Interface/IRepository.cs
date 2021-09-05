@@ -65,6 +65,8 @@ namespace BPGamification.Interfaces
 
         Task<IEnumerable<User>> GetAllUsers();
 
+        Task<UserTask> ChangeUserTask(UserTask newUserTask);
+
 
 
     }

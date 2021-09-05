@@ -70,6 +70,25 @@ namespace BPGamification
             return null;
         }
 
+        async Task<UserTask> IRepository.ChangeUserTask(UserTask newUserTask)
+        {
+            var oldUserTask = await _dataBaseContext.UserTasks.FirstOrDefaultAsync(userTask => userTask.Id == newUserTask.Id);
+
+            if (oldUserTask != null)
+            {
+                oldUserTask.Id = newUserTask.Id;
+                oldUserTask.TaskId = newUserTask.TaskId;
+                oldUserTask.Status = newUserTask.Status;
+                oldUserTask.UserId = newUserTask.UserId;
+
+                await _dataBaseContext.SaveChangesAsync();
+
+                return oldUserTask;
+            }
+
+            return null;
+        }
+
         async System.Threading.Tasks.Task IRepository.DeleteWorkHistory()
         {
             var histories =  _dataBaseContext.WorksHistories;
@@ -89,6 +108,8 @@ namespace BPGamification
         {
             return await _dataBaseContext.UserTasks.AsNoTracking().Where(UserTask => UserTask.UserId == userId).ToListAsync();
         }
+
+
 
 
 
