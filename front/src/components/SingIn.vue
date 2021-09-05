@@ -2,7 +2,9 @@
   <div class="home container d-flex justify-content-center">
     <form>
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <label for="exampleInputEmail1" class="form-label"
+          >Адрес электронной почты</label
+        >
         <input
           type="email"
           class="form-control"
@@ -11,7 +13,7 @@
         />
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="exampleInputPassword1" class="form-label">Пароль</label>
         <input
           type="password"
           class="form-control"
@@ -21,10 +23,12 @@
       <div class="mb-3 form-check d-flex align-items-center">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" />
         <label class="form-check-label radio-label" for="exampleCheck1"
-          >Check me out</label
+          >Запомнить меня</label
         >
       </div>
-      <button type="submit" class="btn btn-outline-dark">Submit</button>
+      <button type="submit" class="btn btn-outline-dark">
+        <router-link to="/PersonalAcc"> Войти</router-link>
+      </button>
     </form>
   </div>
 </template>
@@ -46,6 +50,13 @@ label {
 }
 .btn {
   width: 100px;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
 }
 </style>
 

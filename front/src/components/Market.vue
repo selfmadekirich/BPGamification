@@ -5,17 +5,24 @@
       :key="item.id"
       class="all-cards col-lg-4 col-md-6 col-12 "
     >
-      <div class="d-flex flex-column">
-        <img src="../assets/pizza.jpg" />
-        <h3>{{ item.info }}</h3>
-        <h2>{{ item.price }}</h2>
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <img :src="item.image" />
+        <h5 class="mt-3">{{ item.info }} {{ item.price }}</h5>
+        <button type="button" class="btn">
+          <h4 class="mt-3">Забрать</h4>
+        </button>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
 .all-cards {
-  margin-top: 5%;
+  margin-top: 3%;
+}
+img {
+  width: 270px;
+  height: 270px;
+  border-radius: 12px;
 }
 </style>
 <script>
